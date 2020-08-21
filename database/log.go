@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -42,6 +44,7 @@ func (c *client) GetBuildLogs(id int64) ([]*library.Log, error) {
 // GetStepLog gets a log by unique ID from the database.
 func (c *client) GetStepLog(id int64) (*library.Log, error) {
 	logrus.Tracef("Getting log for step %d from the database", id)
+	fmt.Println("kelly: database > GetStepLog")
 
 	// variable to store query results
 	l := new(database.Log)
@@ -74,6 +77,7 @@ func (c *client) GetServiceLog(id int64) (*library.Log, error) {
 // CreateLog creates a new log in the database.
 func (c *client) CreateLog(l *library.Log) error {
 	logrus.Tracef("Creating log for step %d in the database", l.GetStepID())
+	fmt.Println("kelly: database > CreateLog")
 
 	// cast to database type
 	log := database.LogFromLibrary(l)
@@ -93,6 +97,7 @@ func (c *client) CreateLog(l *library.Log) error {
 // UpdateLog updates a log in the database.
 func (c *client) UpdateLog(l *library.Log) error {
 	logrus.Tracef("Updating log for step %d in the database", l.GetStepID())
+	fmt.Println("kelly: database > UpdateLog")
 
 	// cast to database type
 	log := database.LogFromLibrary(l)

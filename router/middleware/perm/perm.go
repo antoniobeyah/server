@@ -27,6 +27,7 @@ func MustPlatformAdmin() gin.HandlerFunc {
 		u := user.Retrieve(c)
 
 		logrus.Debugf("Verifying user %s is a platform admin", u.GetName())
+		fmt.Println("kelly: perm > MustPlatformAdmin")
 		switch {
 		case globalPerms(u):
 			return
@@ -132,6 +133,7 @@ func MustWrite() gin.HandlerFunc {
 		u := user.Retrieve(c)
 
 		logrus.Debugf("Verifying user %s has 'write' permissions for repo %s", u.GetName(), r.GetFullName())
+		fmt.Println("kelly: perm > MustWrite")
 		if globalPerms(u) {
 			return
 		}
@@ -165,6 +167,7 @@ func MustRead() gin.HandlerFunc {
 		// check if the repo visibility field is set to public
 		if strings.EqualFold(r.GetVisibility(), constants.VisibilityPublic) {
 			logrus.Debugf("repo %s has %s visibility - skipping 'read' check for user %s", r.GetFullName(), r.GetVisibility(), u.GetName())
+			fmt.Println("kelly: perm > MustRead")
 			return
 		}
 

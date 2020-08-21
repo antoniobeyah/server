@@ -5,6 +5,7 @@
 package middleware
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,8 @@ import (
 //   1. A time package format string (e.g. time.RFC3339).
 //   2. A boolean stating whether to use UTC time zone or local.
 func Logger(logger *logrus.Logger, timeFormat string, utc bool) gin.HandlerFunc {
+	fmt.Println("kelly: middleware > Logger")
+
 	return func(c *gin.Context) {
 		start := time.Now()
 		// some evil middlewares modify this values

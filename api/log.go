@@ -235,6 +235,7 @@ func GetServiceLog(c *gin.Context) {
 	s := service.Retrieve(c)
 
 	logrus.Infof("Reading logs for step %s/%d/%d", r.GetFullName(), b.GetNumber(), s.GetNumber())
+	fmt.Println("kelly: api > GetServiceLog: 1")
 
 	// send API call to capture the service logs
 	l, err := database.FromContext(c).GetServiceLog(s.GetID())
@@ -573,6 +574,7 @@ func GetStepLog(c *gin.Context) {
 	s := step.Retrieve(c)
 
 	logrus.Infof("Reading logs for step %s/%d/%d", r.GetFullName(), b.GetNumber(), s.GetNumber())
+	fmt.Println("kelly: api > GetStepLog: 2")
 
 	// send API call to capture the step logs
 	l, err := database.FromContext(c).GetStepLog(s.GetID())
@@ -651,6 +653,7 @@ func UpdateStepLog(c *gin.Context) {
 	s := step.Retrieve(c)
 
 	logrus.Infof("Updating logs for step %s/%d/%d", r.GetFullName(), b.GetNumber(), s.GetNumber())
+	fmt.Println("kelly: api > UpdateStepLog")
 
 	// send API call to capture the step logs
 	l, err := database.FromContext(c).GetStepLog(s.GetID())

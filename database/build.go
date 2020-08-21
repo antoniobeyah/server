@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -16,6 +18,7 @@ import (
 // GetBuild gets a build by unique ID and repo ID from the database.
 func (c *client) GetBuild(number int, r *library.Repo) (*library.Build, error) {
 	logrus.Tracef("Getting build %s/%d from the database", r.GetFullName(), number)
+	fmt.Println("kelly: database > GetBuild")
 
 	// variable to store query results
 	b := new(database.Build)
@@ -32,6 +35,7 @@ func (c *client) GetBuild(number int, r *library.Repo) (*library.Build, error) {
 // GetLastBuild gets the last build ran by repo ID from the database.
 func (c *client) GetLastBuild(r *library.Repo) (*library.Build, error) {
 	logrus.Tracef("Getting last build for repo %s from the database", r.GetFullName())
+	fmt.Println("kelly: database > GetLastBuild: 1")
 
 	// variable to store query results
 	b := new(database.Build)
@@ -53,6 +57,7 @@ func (c *client) GetLastBuild(r *library.Repo) (*library.Build, error) {
 // GetLastBuildByBranch gets the last build ran by repo ID and branch from the database.
 func (c *client) GetLastBuildByBranch(r *library.Repo, branch string) (*library.Build, error) {
 	logrus.Tracef("Getting last build for repo %s from the database", r.GetFullName())
+	fmt.Println("kelly: database > GetLastBuildByBranch: 2")
 
 	// variable to store query results
 	b := new(database.Build)
@@ -247,6 +252,7 @@ func (c *client) GetRepoBuildCountByEvent(r *library.Repo, event string) (int64,
 // CreateBuild creates a new build in the database.
 func (c *client) CreateBuild(b *library.Build) error {
 	logrus.Tracef("Creating build %d in the database", b.GetNumber())
+	fmt.Println("kelly: database > CreateBuild")
 
 	// cast to database type
 	build := database.BuildFromLibrary(b)
@@ -266,7 +272,7 @@ func (c *client) CreateBuild(b *library.Build) error {
 // UpdateBuild updates a build in the database.
 func (c *client) UpdateBuild(b *library.Build) error {
 	logrus.Tracef("Updating build %d in the database", b.GetNumber())
-
+	fmt.Println("kelly: database > UpdateBuild")
 	// cast to database type
 	build := database.BuildFromLibrary(b)
 

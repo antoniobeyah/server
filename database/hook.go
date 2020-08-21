@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -16,6 +18,7 @@ import (
 // GetUser gets a user by unique ID from the database.
 func (c *client) GetHook(number int, r *library.Repo) (*library.Hook, error) {
 	logrus.Tracef("Getting webhook %s/%d from the database", r.GetFullName(), number)
+	fmt.Println("kelly: database > GetHook")
 
 	// variable to store query results
 	h := new(database.Hook)
@@ -32,6 +35,7 @@ func (c *client) GetHook(number int, r *library.Repo) (*library.Hook, error) {
 // GetLastHook gets the last hook by repo ID from the database.
 func (c *client) GetLastHook(r *library.Repo) (*library.Hook, error) {
 	logrus.Tracef("Getting last hook for repo %s from the database", r.GetFullName())
+	fmt.Println("kelly: database > GetLastHook")
 
 	// variable to store query results
 	h := new(database.Hook)
@@ -125,6 +129,7 @@ func (c *client) GetRepoHookList(r *library.Repo, page, perPage int) ([]*library
 // CreateHook creates a new webhook in the database.
 func (c *client) CreateHook(h *library.Hook) error {
 	logrus.Tracef("Creating hook %s in the database", h.GetSourceID())
+	fmt.Println("kelly: database > CreateHook")
 
 	// cast to database type
 	hook := database.HookFromLibrary(h)
@@ -144,6 +149,7 @@ func (c *client) CreateHook(h *library.Hook) error {
 // UpdateHook updates a webhook in the database.
 func (c *client) UpdateHook(h *library.Hook) error {
 	logrus.Tracef("Updating hook %s in the database", h.GetSourceID())
+	fmt.Println("kelly: database > UpdateHook")
 
 	// cast to database type
 	hook := database.HookFromLibrary(h)

@@ -202,17 +202,17 @@ func PostWebhook(c *gin.Context) {
 	// send API call to capture the created webhook
 	h, _ = database.FromContext(c).GetHook(h.GetNumber(), r)
 
-	// verify the webhook from the source control provider
-	err = source.FromContext(c).VerifyWebhook(dupRequest, r)
-	if err != nil {
-		retErr := fmt.Errorf("unable to verify webhook: %v", err)
-		util.HandleError(c, http.StatusUnauthorized, retErr)
+	// // verify the webhook from the source control provider
+	// err = source.FromContext(c).VerifyWebhook(dupRequest, r)
+	// if err != nil {
+	// 	retErr := fmt.Errorf("unable to verify webhook: %v", err)
+	// 	util.HandleError(c, http.StatusUnauthorized, retErr)
 
-		h.SetStatus(constants.StatusFailure)
-		h.SetError(retErr.Error())
+	// 	h.SetStatus(constants.StatusFailure)
+	// 	h.SetError(retErr.Error())
 
-		return
-	}
+	// 	return
+	// }
 
 	// check if the repo is active
 	if !r.GetActive() {
@@ -421,6 +421,7 @@ func publishToQueue(queue queue.Service, p *pipeline.Build, b *library.Build, r 
 	item := types.ToItem(p, b, r, u)
 
 	logrus.Infof("Converting queue item to json for build %d for %s", b.GetNumber(), r.GetFullName())
+	fmt.Println("kelly: api > publishToQueue: Converting")
 
 	byteItem, err := json.Marshal(item)
 	if err != nil {
@@ -430,6 +431,7 @@ func publishToQueue(queue queue.Service, p *pipeline.Build, b *library.Build, r 
 	}
 
 	logrus.Infof("Establishing route for build %d for %s", b.GetNumber(), r.GetFullName())
+	fmt.Println("kelly: api > publishToQueue: Establishing")
 
 	route, err := queue.Route(&p.Worker)
 	if err != nil {
@@ -439,6 +441,7 @@ func publishToQueue(queue queue.Service, p *pipeline.Build, b *library.Build, r 
 	}
 
 	logrus.Infof("Publishing item for build %d for %s to queue %s", b.GetNumber(), r.GetFullName(), route)
+	fmt.Println("kelly: api > publishToQueue: Publishing")
 
 	err = queue.Publish(route, byteItem)
 	if err != nil {

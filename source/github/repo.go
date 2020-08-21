@@ -50,6 +50,7 @@ func (c *client) ConfigBackoff(u *library.User, org, name, ref string) (data []b
 // Config gets the pipeline configuration from the GitHub repo.
 func (c *client) Config(u *library.User, org, name, ref string) ([]byte, error) {
 	logrus.Tracef("Capturing configuration file for %s/%s/commit/%s", org, name, ref)
+	fmt.Println("kelly: github > Config")
 
 	// create GitHub OAuth client with user's token
 	client := c.newClientToken(*u.Token)
@@ -188,6 +189,7 @@ func (c *client) Enable(u *library.User, org, name, secret string) (string, erro
 // Status sends the commit status for the given SHA from the GitHub repo.
 func (c *client) Status(u *library.User, b *library.Build, org, name string) error {
 	logrus.Tracef("Setting commit status for %s/%s/%d @ %s", org, name, b.GetNumber(), b.GetCommit())
+	fmt.Println("kelly: github > Status")
 
 	// create GitHub OAuth client with user's token
 	client := c.newClientToken(*u.Token)

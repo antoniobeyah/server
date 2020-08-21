@@ -56,6 +56,7 @@ func Establish() gin.HandlerFunc {
 		}
 
 		logrus.Debugf("Reading step %s/%d/%d", r.GetFullName(), b.GetNumber(), number)
+		fmt.Println("kelly: rtr/mw/step > Establish: Debug: Reading repo")
 		s, err := database.FromContext(c).GetStep(number, b)
 		if err != nil {
 			retErr := fmt.Errorf("unable to read step %s/%d/%d: %v", r.GetFullName(), b.GetNumber(), number, err)

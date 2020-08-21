@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -15,6 +17,7 @@ import (
 // GetRepo gets a repo by org and name from the database.
 func (c *client) GetRepo(org, name string) (*library.Repo, error) {
 	logrus.Tracef("Getting repo %s/%s from the database", org, name)
+	fmt.Println("kelly: database > GetRepo")
 
 	// variable to store query results
 	r := new(database.Repo)

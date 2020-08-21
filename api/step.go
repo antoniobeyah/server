@@ -351,6 +351,7 @@ func UpdateStep(c *gin.Context) {
 	s := step.Retrieve(c)
 
 	logrus.Infof("Updating step %d for build %s/%d", s.GetNumber(), r.GetFullName(), b.GetNumber())
+	fmt.Println("kelly: api > UpdateStep")
 
 	// capture body from API request
 	input := new(library.Step)

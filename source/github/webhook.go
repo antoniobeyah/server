@@ -22,6 +22,7 @@ import (
 // ProcessWebhook parses the webhook from a repo
 func (c *client) ProcessWebhook(request *http.Request) (*types.Webhook, error) {
 	logrus.Tracef("Processing GitHub webhook")
+	fmt.Println("kelly: github > ProcessWebhook")
 
 	h := new(library.Hook)
 	h.SetNumber(1)
@@ -150,6 +151,7 @@ func processPushEvent(h *library.Hook, payload *github.PushEvent) (*types.Webhoo
 // processPREvent is a helper function to process the pull_request event
 func processPREvent(h *library.Hook, payload *github.PullRequestEvent) (*types.Webhook, error) {
 	logrus.Tracef("processing pull_request GitHub webhook for %s", payload.GetRepo().GetFullName())
+	fmt.Println("kelly: github > processPREvent")
 
 	// update the hook object
 	h.SetBranch(payload.GetPullRequest().GetBase().GetRef())

@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -15,6 +17,7 @@ import (
 // GetUser gets a user by unique ID from the database.
 func (c *client) GetUser(id int64) (*library.User, error) {
 	logrus.Tracef("Getting user %d from the database", id)
+	fmt.Println("kelly: database > GetUser")
 
 	// variable to store query results
 	u := new(database.User)

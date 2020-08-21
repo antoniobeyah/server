@@ -40,6 +40,7 @@ func Establish() gin.HandlerFunc {
 		}
 
 		logrus.Debugf("Reading repo %s/%s", oParam, rParam)
+		fmt.Println("kelly: repo > Establish: Debug: Reading repo")
 		r, err := database.FromContext(c).GetRepo(oParam, rParam)
 		if err != nil {
 			retErr := fmt.Errorf("unable to read repo %s/%s: %v", oParam, rParam, err)

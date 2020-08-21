@@ -38,6 +38,7 @@ func (c *client) Changeset(u *library.User, r *library.Repo, sha string) ([]stri
 // ChangesetPR captures the list of files changed for a pull request.
 func (c *client) ChangesetPR(u *library.User, r *library.Repo, number int) ([]string, error) {
 	logrus.Tracef("Capturing pull request changeset for %s/pull/%d", r.GetFullName(), number)
+	fmt.Println("kelly: github > ChangesetPR")
 
 	// create GitHub OAuth client with user's token
 	client := c.newClientToken(u.GetToken())

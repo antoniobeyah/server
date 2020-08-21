@@ -5,6 +5,8 @@
 package database
 
 import (
+	"fmt"
+
 	"github.com/go-vela/types/constants"
 	"github.com/go-vela/types/database"
 	"github.com/go-vela/types/library"
@@ -15,6 +17,7 @@ import (
 // GetStep gets a step by number and build ID from the database.
 func (c *client) GetStep(number int, b *library.Build) (*library.Step, error) {
 	logrus.Tracef("Getting step %d for build %d from the database", number, b.GetNumber())
+	fmt.Println("kelly: database > GetStep")
 
 	// variable to store query results
 	s := new(database.Step)
@@ -157,6 +160,7 @@ func (c *client) GetStepStatusCount() (map[string]float64, error) {
 // CreateStep creates a new step in the database.
 func (c *client) CreateStep(s *library.Step) error {
 	logrus.Tracef("Creating step %s in the database", s.GetName())
+	fmt.Println("kelly: database > CreateStep")
 
 	// cast to database type
 	step := database.StepFromLibrary(s)

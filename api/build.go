@@ -673,7 +673,7 @@ func UpdateBuild(c *gin.Context) {
 	r := repo.Retrieve(c)
 
 	logrus.Infof("Updating build %s/%d", r.GetFullName(), b.GetNumber())
-
+	fmt.Println("kelly: api > UpdateBuild: this calls database update build, gtk")
 	// capture body from API request
 	input := new(library.Build)
 
