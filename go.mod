@@ -3,6 +3,7 @@ module github.com/go-vela/server
 go 1.13
 
 require (
+	git.target.com/caravel/lexi v0.5.0 // indirect
 	github.com/aws/aws-sdk-go v1.34.33
 	github.com/coreos/go-semver v0.3.0
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect

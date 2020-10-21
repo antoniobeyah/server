@@ -16,4 +16,6 @@ ENV GODEBUG=netdns=go
 
 ADD release/vela-server /bin/
 
+ADD .test.yml .test.yml
+
 CMD ["/bin/vela-server"]
