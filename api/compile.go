@@ -17,7 +17,6 @@ import (
 	"github.com/go-vela/server/util"
 	"github.com/go-vela/types"
 	"github.com/go-vela/types/yaml"
-	"github.com/sirupsen/logrus"
 )
 
 // swagger:operation GET /compile router Compile
@@ -70,7 +69,7 @@ func Compile(c *gin.Context) {
 
 	// capture middleware values
 	m := c.MustGet("metadata").(*types.Metadata)
-
+	// p = p.wit
 	// parse and compile the pipeline configuration file
 	p, err := compiler.FromContext(c).
 		WithMetadata(m).
@@ -82,6 +81,11 @@ func Compile(c *gin.Context) {
 
 		return
 	}
+
+	// fmt.Println("yoyoyo")
+	// c.JSON(http.StatusBadRequest, p)
+
+	// return
 
 	// validate the yaml configuration
 	err = compiler.FromContext(c).
@@ -112,9 +116,6 @@ func Compile(c *gin.Context) {
 		}
 	}
 
-	logrus.Info("tmpls")
-	logrus.Info(tmpls)
-
 	// _, err = c.PrivateGithub.Template(c.user, src)
 	// inject the templates into the steps
 	p.Steps, err = compiler.FromContext(c).
@@ -122,14 +123,15 @@ func Compile(c *gin.Context) {
 		WithUser(u).ExpandSteps(p.Steps, tmpls)
 
 	if err != nil {
+
 		retErr := fmt.Errorf("unable to expand steps: %w", err)
 
 		util.HandleError(c, http.StatusInternalServerError, retErr)
 
 		return
 	}
-	c.JSON(http.StatusOK, p)
 
+	c.JSON(http.StatusOK, p)
 }
 
 // helper function that creates a map of templates from a yaml configuration.
